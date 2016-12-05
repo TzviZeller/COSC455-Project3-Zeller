@@ -1,0 +1,19 @@
+%flight plans
+flight(fresno, seattle).
+flight(fresno, albany).
+flight(fresno, boston).
+flight(seattle, omaha).
+flight(seattle, dallas).
+flight(omaha, albany).
+flight(omaha, atlanta).
+flight(albany, dallas).
+flight(albany, seattle)
+flight(atlanta, dallas).
+flight(atlanta, boston).
+flight(atlanta, albany).
+flight(dallas, albany).
+flight(dallas, seattle).
+
+%method for flight
+path(From,TO):- flight(From,TO).
+path(From,TO):- flight(Stop,TO),path(From,Stop).
