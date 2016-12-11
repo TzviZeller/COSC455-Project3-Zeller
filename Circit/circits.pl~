@@ -1,0 +1,226 @@
+:- style_check(-singleton).
+
+%methods avalible
+:-write("Methods avalible:"),nl,
+	write("half(A,B,Dif,Barrow) = Half-Subtractor"),nl,
+	write("onetotwo(A,IN,Out1,Out2) = 1-to-2 Line Decoder"),nl,
+	write("twotofour(A,B,IN,Out1,Out2,Out3,Out4) = 2-to-4 Line Decoder"),nl,
+	write("twoinput(A,X1,X2,X) = 2-Input Multiplexor "),nl,
+	write("fourinput(A,B,X1,X2,X3,X4,X) = 4-Input Multiplexor "),nl,nl,
+	write("Call method to print full table or enter specific arguments").
+
+%half subtrator method
+half(A,B,Dif,Barrow) :-
+	xor(A,B,Dif),
+	not(A, NotA),
+	and(NotA,B,Barrow),
+
+	write("A"),
+	write(" "),
+	write("B"),
+	write(" "),
+	write("Dif"),
+	write(" "),
+	write("Barrow"),nl,
+
+	write(A),
+	write(" "),
+	write(B),
+	write(" "),
+	write(Dif),
+	write(" "),
+	write(Barrow),nl,
+	fail.
+
+half:- half(A,B,Dif,Barrow),
+       fail.
+
+%1-2 method
+onetotwo(A,IN,Out1,Out2) :-
+	not(A, NotA),
+	and(NotA,IN,Out1),
+	and(A,IN,Out2),
+
+	write("A"),
+	write(" "),
+	write("IN"),
+	write(" "),
+	write("Out1"),
+	write(" "),
+	write("Out2"),nl,
+
+	write(A),
+	write(" "),
+	write(IN),
+	write(" "),
+	write(Out1),
+	write(" "),
+	write(Out2),nl,
+	fail.
+
+onetotwo:- onetotwo(A,IN,Out1,Out2),
+	   fail.
+
+%2-4 method
+twotofour(A,B,IN,Out1,Out2,Out3,Out4) :-
+	not(A,NotA),
+	not(B,NotB),
+	and(NotA,NotB,IN,Out1),
+	and(A,NotB,IN,Out2),
+	and(NotA,B,IN,Out3),
+	and(A,B,IN,Out4),
+
+	write("A"),
+	write(" "),
+	write("B"),
+	write(" "),
+	write("IN"),
+	write(" "),
+	write("Out1"),
+	write(" "),
+	write("Out2"),
+	write(" "),
+	write("Out3"),
+	write(" "),
+	write("Out4"),nl,
+
+	write(A),
+	write(" "),
+	write(B),
+	write(" "),
+	write(IN),
+	write(" "),
+	write(Out1),
+	write(" "),
+	write(Out2),
+	write(" "),
+	write(Out3),
+	write(" "),
+	write(Out4),nl,
+	fail.
+
+twotofour:- twotofour(A,B,IN,Out1,Out2,Out3,Out4),
+	   fail.
+
+%two input method
+twoinput(A,X1,X2,X):-
+	not(A,NotA),
+	and(NotA,X2,Out1),
+	not(NotA,A),
+	and(A,X1,Out2),
+	or(Out1,Out2,X),
+
+	write("A"),
+	write(" "),
+	write("X1"),
+	write(" "),
+	write("X2"),
+	write(" "),
+	write("X"),nl,
+
+
+	write(A),
+	write(" "),
+	write(X1),
+	write(" "),
+	write(X2),
+	write(" "),
+	write(X),nl,
+	fail.
+
+twoinput:- twoinput(A,X1,X2,X),
+	fail.
+
+%for input method
+fourinput(A,B,X1,X2,X3,X4,X):-
+	not(A,NotA),
+	not(B,NotB),
+	and(NotA,NotB,X1,Out1),
+	and(A,NotB,X2,Out2),
+	and(NotA,B,X3,Out3),
+	and(A,B,X4,Out4),
+	or(Out1,Out2,Out3,Out4,X),
+
+	write("A"),
+	write(" "),
+	write("B"),
+	write(" "),
+	write("X1"),
+	write(" "),
+	write("X2"),
+	write(" "),
+	write("X3"),
+	write(" "),
+	write("X4"),
+	write(" "),
+	write("X"),nl,
+
+	write(A),
+	write(" "),
+	write(B),
+	write(" "),
+	write(X1),
+	write(" "),
+	write(X2),
+	write(" "),
+	write(X3),
+	write(" "),
+	write(X4),
+	write(" "),
+	write(X),nl,
+	fail.
+
+forinput:- fourinput(A,B,X1,X2,X3,X4,X),
+	fail.
+
+
+
+%facts for methods
+%not
+not(0,1).
+not(1,0).
+
+%and /2
+and(0, 0, 0).
+and(0, 1, 0).
+and(1, 0, 0).
+and(1, 1, 1).
+
+%and /3
+and(0, 0, 0, 0).
+and(0, 0, 1, 0).
+and(0, 1, 0, 0).
+and(0, 1, 1, 0).
+and(1, 0, 0, 0).
+and(1, 0, 1, 0).
+and(1, 1, 0, 0).
+and(1, 1, 1, 1).
+
+%or /2
+or(0, 0, 0).
+or(0, 1, 1).
+or(1, 0, 1).
+or(1, 1, 1).
+
+%or /4
+or(0,0,0,0,0).
+or(0,0,0,1,1).
+or(0,0,1,0,1).
+or(0,0,1,1,1).
+or(0,1,0,0,1).
+or(0,1,0,1,1).
+or(0,1,1,1,1).
+or(1,0,0,0,1).
+or(1,0,0,1,1).
+or(1,0,1,0,1).
+or(1,0,1,1,1).
+or(1,1,0,0,1).
+or(1,1,0,1,1).
+or(1,1,1,1,1).
+
+
+%xor
+xor(0,0,0).
+xor(0,1,1).
+xor(1,0,1).
+xor(1,1,0).
