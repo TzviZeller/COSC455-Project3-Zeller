@@ -2,7 +2,7 @@
 :-dynamic(course/4).
 
 % load the course records from a file
-load_course:- consult('C:\Users\Tzvi\Documents\collage\COSC\455\project3\COSC455-Project3-Zeller\DB'), tell('fall16sched.pl.bak'), listing(course), told.
+load_course:- consult('fall16sched.pl'), tell('fall16sched.pl.bak'), listing(course), told.
 
 % list students
 list_course :- listing(course).
@@ -10,7 +10,7 @@ list_course :- listing(course).
 % add a course
 add_course(Name,Location,Time,Instructor) :- assert(course(Name,Location,Time,Instructor)),write(' added.').
 
-% remove course froM data
+% remove course from data
 delete_course(Name,Location,Time,Instructor) :- retract(course(Name,Location,Time,Instructor)), write(' deleted.').
 
 % save modified records in place of old ones.
